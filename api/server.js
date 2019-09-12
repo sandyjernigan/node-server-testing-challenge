@@ -1,5 +1,8 @@
 const express = require('express');
 
+// Routers
+const usersRouter = require('./api/users/users-router.js');
+
 const server = express();
 
 server.use(express.json());
@@ -11,5 +14,8 @@ server.get('/', (req, res) => {
     "<p>This is the Starting Page.</p>" +
     "</div>");
 });
+
+// Routes
+server.use('/api/users', usersRouter);
 
 module.exports = server;
