@@ -3,6 +3,8 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 const restricted = require('../middleware/restricted.js');
 
+
+// TODO: Add Testing for GET /api/users
 router.get('/', restricted, (req, res) => {
 
   // If the user is an admin they can see all users, otherwise they can only see their own info

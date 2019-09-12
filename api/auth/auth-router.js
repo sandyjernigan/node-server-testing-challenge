@@ -6,7 +6,9 @@ const Users = require('../users/users-model.js');
 
 // for endpoints /api/auth/register 	Creates a user using the information sent inside the body of the request. 
 // Hash the password before saving the user to the database.
-router.post('/register', (req, res) => {
+
+// TODO: Add Testing for GET /api/auth/register
+router.post('/register', (req, res) => { 
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
@@ -25,6 +27,8 @@ router.post('/register', (req, res) => {
 // /api/auth/login 	Use the credentials sent inside the body to authenticate the user. 
 // On successful login, create a new JWT with the user id as the subject and send it back to the client. 
 // If login fails, respond with the correct status code and the message: 'Invalid Request.'
+
+// TODO: Add Testing for GET /api/auth/login
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
 
