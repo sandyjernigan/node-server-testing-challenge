@@ -1,6 +1,8 @@
+// Testing for server.js
 const request = require('supertest');
 const db = require('../data/dbConfig.js');
 
+// Server file
 const server = require('./server.js');
 
 describe('Server', () => {

@@ -8,7 +8,6 @@ const server = express();
 
 server.use(express.json());
 
-// TODO: Add Testing for GET /
 // Base Route
 server.get('/', (req, res) => {
   res.send("<div align=\'center\'>" + 
