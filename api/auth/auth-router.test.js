@@ -11,13 +11,13 @@ describe('Auth Router', () => {
     await db('users').truncate();
   })
 
-  // Add Testing for GET /api/auth/register
+  // Add Testing for POST /api/auth/register
   describe('POST /api/auth/register', () => {
         
-    it('should return status 201', () => {
+    it('test register', () => {
 
       // test setup
-      const testunit = {
+      const addUser = {
         username: 'user',
         password: 'pass',
         role: 'role'
@@ -25,12 +25,32 @@ describe('Auth Router', () => {
 
       request(router)
         .post('/register')
-        .send(testunit)
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
-        .expect(201, testunit);
+        .type('application/json')
+        .send(addUser)
+        .expect(201);
     })
 
   });
 
+  // Add Testing for POST /api/auth/login
+  describe('POST /api/auth/login', () => {
+        
+    it('test login', () => {
+
+      // test setup
+      const loginUser = {
+        username: 'user',
+        password: 'pass',
+        role: 'role'
+      };
+
+      request(router)
+        .post('/login')
+        .send(loginUser)
+        .set('Accept', 'application/json')
+        .expect(200, loginUser);
+        
+    })
+
+  });
 });

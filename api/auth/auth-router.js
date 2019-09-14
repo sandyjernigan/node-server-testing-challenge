@@ -27,9 +27,9 @@ router.post('/register', (req, res) => {
 // On successful login, create a new JWT with the user id as the subject and send it back to the client. 
 // If login fails, respond with the correct status code and the message: 'Invalid Request.'
 
-// TODO: Add Testing for GET /api/auth/login
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
+  console.log(res.body.username);
 
   Users.findBy({ username })
     .first()
