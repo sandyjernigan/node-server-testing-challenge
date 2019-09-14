@@ -7,7 +7,6 @@ const Users = require('../users/users-model.js');
 // for endpoints /api/auth/register 	Creates a user using the information sent inside the body of the request. 
 // Hash the password before saving the user to the database.
 
-// TODO: Add Testing for GET /api/auth/register
 router.post('/register', (req, res) => { 
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
