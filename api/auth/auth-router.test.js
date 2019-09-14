@@ -2,7 +2,6 @@ const request = require('supertest');
 const db = require('../../data/dbConfig.js');
 
 const router = require('./auth-router.js');
-const Users = require('../users/users-model.js');
 
 describe('Auth Router', () => {
 
