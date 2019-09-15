@@ -7,7 +7,6 @@ module.exports = {
   findById,
 };
 
-// TODO: Add Testing for endpoints
 function find() {
   return db('users')
     .select('id', 'username', 'role');
