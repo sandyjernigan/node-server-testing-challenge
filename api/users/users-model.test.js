@@ -66,7 +66,43 @@ describe('Users Model', () => {
       const user = await Users.findById(1)
 
       // assertion
+      const results = await db('users');
+      expect(results.length).toBe(1);
       expect(user).toEqual(expectedResultsForUser);
+    });
+  });
+  
+  // test findBy(filter)
+  describe('function findBy(filter)', () => {
+    it('findBy(filter) should resolve to 1 user when searching username', async () => {
+      await db('users').insert(insertData);
+      await db('users').insert({username: 'user2', password: 'testpass2', role: 'standard'});
+      await db('users').insert({username: 'user3', password: 'testpass3', role: 'intern'});
+
+      username = { username: 'user' }
+
+      // findBy(filter) -- search database where({ username })
+      const user = await Users.findBy(username)
+
+      // assertion
+      expect(user.length).toBe(1);
+      expect(user).toEqual([expectedResultsForUser]);
+    });
+    
+    it('findBy(filter) should resolve to 2 users when searching role', async () => {
+      await db('users').insert(insertData);
+      await db('users').insert({username: 'user2', password: 'testpass2', role: 'standard'});
+      await db('users').insert({username: 'user3', password: 'testpass3', role: 'admin'});
+
+      role = { role: 'admin' }
+
+      // findBy(filter) -- search database where({ role: 'admin' })
+      const results = await Users.findBy(role)
+
+      // assertion
+      expect(results.length).toBe(2);
+      expect(results[0]).toEqual(expectedResultsForUser);
+      expect(results[1].username).toEqual('user3');
     });
   });
 
