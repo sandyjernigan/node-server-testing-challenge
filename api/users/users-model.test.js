@@ -27,9 +27,11 @@ describe('Users Model', () => {
   // test find users
   describe('function find', () => {
     it('find users', async () => {
+      
+      // find() -- all users
       const results = await Users.find()
 
-      // users database will be empty
+      // users database should be empty
       expect(results).toEqual([])
     })
   })
@@ -37,6 +39,8 @@ describe('Users Model', () => {
   // test add user
   describe('function add', () => {
     it('add(user) should resolve to length 1 for database', async () => {
+      
+      // add(user) - insert user into database
       await Users.add(insertData)
 
       // assertion
@@ -46,6 +50,8 @@ describe('Users Model', () => {
     });
 
     it('should resolve to the newly created user', async () => {
+
+      // add(user) - insert user into database
       const user = await Users.add(insertData);
       expect(user).toEqual({ id: 1, username: 'user', role: 'admin'});
     });
@@ -56,7 +62,7 @@ describe('Users Model', () => {
     it('findById(id) should resolve to 1 user', async () => {
       await db('users').insert(insertData);
 
-      // findById(id)
+      // findById(id) -- search database where({ id })
       const user = await Users.findById(1)
 
       // assertion
