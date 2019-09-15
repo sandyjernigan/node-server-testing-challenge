@@ -66,10 +66,7 @@ describe('Users Model', () => {
       const user = await Users.findById(1)
 
       // assertion
-      const results = await db('users');
-      expect(results.length).toBe(1);
       expect(user).toEqual(expectedResultsForUser);
-      
     });
   });
 
