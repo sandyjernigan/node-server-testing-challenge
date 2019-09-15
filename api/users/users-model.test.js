@@ -11,6 +11,11 @@ const insertData = {
   password: 'testpass', 
   role: 'admin' 
 };
+const expectedResultsForUser = { 
+  id: 1,
+  username: 'user', 
+  role: 'admin' 
+};
 
 describe('Users Model', () => {
 
@@ -43,6 +48,22 @@ describe('Users Model', () => {
     it('should resolve to the newly created user', async () => {
       const user = await Users.add(insertData);
       expect(user).toEqual({ id: 1, username: 'user', role: 'admin'});
+    });
+  });
+  
+  // test findById(id) user
+  describe('function findById(id)', () => {
+    it('findById(id) should resolve to 1 user', async () => {
+      await db('users').insert(insertData);
+
+      // findById(id)
+      const user = await Users.findById(1)
+
+      // assertion
+      const results = await db('users');
+      expect(results.length).toBe(1);
+      expect(user).toEqual(expectedResultsForUser);
+      
     });
   });
 
