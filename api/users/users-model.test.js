@@ -5,6 +5,13 @@ const db = require('../../data/dbConfig.js');
 // Server file
 const Users = require('./users-model.js');
 
+// test setup content
+const insertData = { 
+  username: 'user', 
+  password: 'testpass', 
+  role: 'admin' 
+};
+
 describe('Users Model', () => {
 
   beforeEach(async () => {
@@ -13,13 +20,30 @@ describe('Users Model', () => {
   })
 
   // test find users
-  describe('find users', () => {
-    it('test find', async () => {
+  describe('function find', () => {
+    it('find users', async () => {
       const results = await Users.find()
 
       // users database will be empty
       expect(results).toEqual([])
     })
   })
+  
+  // test add user
+  describe('function add', () => {
+    it('add(user) should resolve to length 1 for database', async () => {
+      await Users.add(insertData)
+
+      // assertion
+      const results = await db('users');
+      expect(results.length).toBe(1);
+      expect(results[0].username).toBe('user');
+    });
+
+    it('should resolve to the newly created user', async () => {
+      const user = await Users.add(insertData);
+      expect(user).toEqual({ id: 1, username: 'user', role: 'admin'});
+    });
+  });
 
 });
